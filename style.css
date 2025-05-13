@@ -1,1 +1,8 @@
 @import 'tailwindcss';
+
+@layer components {
+  .error {
+    border: 0.15rem solid #dc2626;
+    border-radius: 0.5rem;
+  }
+}
