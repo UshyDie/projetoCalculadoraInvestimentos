@@ -151,32 +151,49 @@
         </button>
       </div>
     </aside>
-    <main class="row-span-2 col-span-2">
-      <!-- Gráficos -->
-      <!-- <section
-
-      
-        id="charts-container"
-        class="h-full flex flex-col justify-between"
+    <main class="row-span-2 col-span-2 relative">
+      <button
+        id="slide-arrow-previous"
+        class="absolute top-0 bottom-0 left-0 text-5xl cursor-pointer bg-slate-200 opacity-50 w-6 hover:opacity-100 focus:opacity-100"
       >
-        <div class="h-1/2 flex flex-col items-center pt-5 pb-10">
-          <p class="font-bold text-lg">Resultado Final</p>
-          <canvas id="final-money-distribution" class=""></canvas>
-        </div>
-        <div class="h-1/2 flex flex-col items-center pb-10">
-          <p class="font-bold text-lg">Progressão</p>
-          <canvas id="progression" class="w-full h-full"></canvas>
-        </div>
-      </section> -->
-
-      <!-- Tabela -->
-      <section id="table-container" class="h-full overflow-y-auto">
-        <p class="font-bold text-lg text-center">Resultados Mensais</p>
-        <table
-          id="results-table"
-          class="w-full max-h-full border border-transparent border-separate"
-        ></table>
-      </section>
+        &#8249;
+      </button>
+      <button
+        id="slide-arrow-next"
+        class="absolute top-0 bottom-0 right-0 text-5xl cursor-pointer bg-slate-200 opacity-50 w-6 hover:opacity-100 focus:opacity-100"
+      >
+        &#8250;
+      </button>
+      <div
+        id="carousel"
+        class="h-full w-full flex overflow-x-auto scroll-smooth"
+      >
+        <!-- Gráficos -->
+        <section
+          id="charts-container"
+          class="h-full flex flex-col justify-between basis-full shrink-0 px-4"
+        >
+          <div class="h-1/2 flex flex-col items-center pt-5 p-28">
+            <p class="font-bold text-lg">Resultado Final</p>
+            <canvas id="final-money-distribution" class=""></canvas>
+          </div>
+          <div class="h-1/2 flex flex-col items-center pb-10">
+            <p class="font-bold text-lg">Progressão</p>
+            <canvas id="progression" class="w-full h-full"></canvas>
+          </div>
+        </section>
+        <!-- Tabela -->
+        <section
+          id="table-container"
+          class="h-full overflow-y-auto basis-full shrink-0"
+        >
+          <p class="font-bold text-lg text-center">Resultados Mensais</p>
+          <table
+            id="results-table"
+            class="w-full max-h-full border border-transparent border-separate"
+          ></table>
+        </section>
+      </div>
     </main>
     <script type="module" src="./main.js"></script>
   </body>

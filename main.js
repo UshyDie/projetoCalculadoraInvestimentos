@@ -38,7 +38,7 @@ function formatCurrencyToTable(value) {
   return value.toLocaleString('pt-Br', { style: 'currency', currency: 'BRL' });
 }
 
-function formatCurrency(value) {
+function formatCurrencyToChart(value) {
   return value.toFixed(2);
 }
 
@@ -49,6 +49,7 @@ function renderProgression(evt) {
   }
 
   resetCharts();
+  resetTable();
 
   const startingAmount = Number(
     document.getElementById('starting-amount').value.replace(',', '.')
@@ -77,7 +78,7 @@ function renderProgression(evt) {
     returnRatePeriod
   );
 
-  /* const finalInvestmentObject = returnsArray[returnsArray.length - 1];
+  const finalInvestmentObject = returnsArray[returnsArray.length - 1];
 
   doughnutChartReference = new Chart(finalMoneyChart, {
     type: 'doughnut',
@@ -86,11 +87,11 @@ function renderProgression(evt) {
       datasets: [
         {
           data: [
-            formatCurrency(finalInvestmentObject.investedAmount),
-            formatCurrency(
+            formatCurrencyToChart(finalInvestmentObject.investedAmount),
+            formatCurrencyToChart(
               finalInvestmentObject.totalInterestReturns * (1 - taxRate / 100)
             ),
-            formatCurrency(
+            formatCurrencyToChart(
               finalInvestmentObject.totalInterestReturns * (taxRate / 100)
             ),
           ],
@@ -114,14 +115,14 @@ function renderProgression(evt) {
         {
           label: 'Total Investido',
           data: returnsArray.map((investmentObject) =>
-            formatCurrency(investmentObject.investedAmount)
+            formatCurrencyToChart(investmentObject.investedAmount)
           ),
           backgroundColor: 'rgb(255, 99, 132)',
         },
         {
           label: 'Retorno do Investimento',
           data: returnsArray.map((investmentObject) =>
-            formatCurrency(investmentObject.interestReturns)
+            formatCurrencyToChart(investmentObject.interestReturns)
           ),
           backgroundColor: 'rgb(54, 162, 235)',
         },
@@ -138,7 +139,7 @@ function renderProgression(evt) {
         },
       },
     },
-  }); */
+  });
 
   createTable(columnsArray, returnsArray, 'results-table');
 }
@@ -157,6 +158,18 @@ function resetCharts() {
   }
 }
 
+function resetTable() {
+  const table = document.getElementById('results-table');
+
+  if (table) {
+    const tHead = table.querySelector('thead');
+    const tBody = table.querySelector('tbody');
+
+    if (tHead) tHead.remove();
+    if (tBody) tBody.remove();
+  }
+}
+
 function clearForm() {
   form['starting-amount'].value = '';
   form['additional-contribution'].value = '';
@@ -165,6 +178,7 @@ function clearForm() {
   form['tax-rate'].value = '';
 
   resetCharts();
+  resetTable();
 
   const errorInputContainers = document.querySelectorAll('.error');
 
@@ -214,6 +228,18 @@ for (const formElement of form) {
     formElement.addEventListener('blur', validateInput);
   }
 }
+
+const mainEl = document.querySelector('main');
+const carouselEl = document.getElementById('carousel');
+const nextButton = document.getElementById('slide-arrow-next');
+const previousButton = document.getElementById('slide-arrow-previous');
+
+nextButton.addEventListener('click', () => {
+  carouselEl.scrollLeft += mainEl.clientWidth;
+});
+previousButton.addEventListener('click', () => {
+  carouselEl.scrollLeft -= mainEl.clientWidth;
+});
 
 form.addEventListener('submit', renderProgression);
 clearFormButton.addEventListener('click', clearForm);
